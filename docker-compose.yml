@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: ecommerce_db
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  web:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASS=root_password
+      - DB_NAME=ecommerce_db
+      - SESSION_SECRET=supersecretkey
+      - TELEGRAM_BOT_TOKEN=IL_TUO_TELEGRAM_BOT_TOKEN
+      - TELEGRAM_CHAT_ID=IL_TUO_TELEGRAM_CHAT_ID
+    depends_on:
+      - db
+
+volumes:
+  db_data:

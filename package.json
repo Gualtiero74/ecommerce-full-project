@@ -1,0 +1,22 @@
+{
+  "name": "node-ecommerce-docker",
+  "version": "1.0.0",
+  "description": "E-commerce app with Node.js, Express, Sequelize, MySQL, EJS and Docker",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev":"nodemon app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.9.2",
+    "node-telegram-bot-api": "^0.65.1",
+    "sequelize": "^6.37.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

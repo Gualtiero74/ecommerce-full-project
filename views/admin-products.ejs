@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title><%= pageTitle %></title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+        header { display: flex; justify-content: space-between; background: #333; color: white; padding: 10px 20px; border-radius: 5px; }
+        header a { color: white; margin-left: 15px; text-decoration: none; }
+        table { width: 100%; background: white; margin-top: 20px; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        .btn { padding: 5px 10px; text-decoration: none; border-radius: 3px; color: white; }
+        .btn-add { background: #007bff; display: inline-block; margin-top: 15px; padding: 10px 15px; }
+        .btn-edit { background: #ffc107; color: black; }
+        .btn-delete { background: #dc3545; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header>
+        <div><strong>Pannello Admin</strong></div>
+        <nav><a href="/">Torna allo Shop</a> <a href="/admin/users">Gestione Utenti</a></nav>
+    </header>
+    <main>
+        <h2>Inventario Prodotti</h2>
+        <a href="/admin/add-product" class="btn btn-add">Aggiungi Nuovo Prodotto</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Titolo</th>
+                    <th>Prezzo</th>
+                    <th>Descrizione</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let prod of products) { %>
+                    <tr>
+                        <td><%= prod.title %></td>
+                        <td>€<%= prod.price %></td>
+                        <td><%= prod.description %></td>
+                        <td>
+                            <a href="/admin/edit-product/<%= prod.id %>" class="btn btn-edit">Modifica</a>
+                            <form action="/admin/delete-product" method="POST" style="display:inline;">
+                                <input type="hidden" name="productId" value="<%= prod.id %>">
+                                <button type="submit" class="btn btn-delete">Elimina</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

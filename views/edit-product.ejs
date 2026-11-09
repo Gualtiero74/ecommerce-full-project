@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title><%= pageTitle %></title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; text-align: center; }
+        .form-control { margin-bottom: 15px; }
+        form { background: white; padding: 30px; display: inline-block; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: left; }
+        input, textarea { padding: 8px; width: 300px; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2><%= editing ? 'Aggiorna Prodotto' : 'Inserisci Prodotto' %></h2>
+    <form action="/admin/<%= editing ? 'edit-product' : 'add-product' %>" method="POST">
+        <div class="form-control">
+            <label>Titolo</label><br>
+            <input type="text" name="title" value="<%= editing ? product.title : '' %>" required>
+        </div>
+        <div class="form-control">
+            <label>Prezzo (€)</label><br>
+            <input type="number" step="0.01" name="price" value="<%= editing ? product.price : '' %>" required>
+        </div>
+        <div class="form-control">
+            <label>Descrizione</label><br>
+            <textarea name="description" rows="5" required><%= editing ? product.description : '' %></textarea>
+        </div>
+        <% if (editing) { %>
+            <input type="hidden" name="productId" value="<%= product.id %>">
+        <% } %>
+        <button type="submit"><%= editing ? 'Salva Modifiche' : 'Crea Prodotto' %></button>
+    </form>
+    <p><a href="/admin/products">Annulla e torna indietro</a></p>
+</body>
+</html>

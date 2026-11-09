@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title><%= pageTitle %></title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+        header { display: flex; justify-content: space-between; background: #333; color: white; padding: 10px 20px; border-radius: 5px; }
+        header a { color: white; margin-left: 15px; text-decoration: none; }
+        table { width: 100%; background: white; margin-top: 20px; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    header>
+        <div><strong>Pannello Admin - Profili</strong></div>
+        <nav><a href="/">Torna allo Shop</a> <a href="/admin/products">Gestione Prodotti</a></nav>
+    </header>
+    <main>
+        <h2>Utenti Registrati nel Sistema</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Ruolo di Sistema</th>
+                    <th>Data Creazione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let u of users) { %>
+                    <tr>
+                        <td><%= u.id %></td>
+                        <td><%= u.email %></td>
+                        <td><strong><%= u.role.toUpperCase() %></strong></td>
+                        <td><%= u.createdAt %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
